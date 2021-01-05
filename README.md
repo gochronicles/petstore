@@ -1,1 +1,1 @@
-# petstore
+# Petstore Application for GoChronicles
