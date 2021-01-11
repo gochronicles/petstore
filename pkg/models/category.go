@@ -1,5 +1,15 @@
 package models
 
+//Category model to store category
 type Category struct {
-	Category_name string `json:"categoryname"`
+	ID           int    `json:"id"`
+	CategoryName string `json:"categoryname"`
+}
+
+//CategoryService interface for Category model
+type CategoryService interface {
+	GetCategory(id int) (*Category, error)
+	GetAllCategory() ([]*Category, error)
+	CreateCategory() error
+	DeleteCategory(id int) error
 }
