@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/labstack/echo/v4"
 	"petstore/internal/petstore/rest"
+
+	"github.com/labstack/echo/v4"
 )
 
 var (
@@ -11,11 +12,9 @@ var (
 
 func main() {
 	mapUrls()
-	router.Logger.Fatal(router.Start(":1323"))
+	router.Logger.Fatal(router.Start(":3000"))
 }
 
 func mapUrls() {
-	router.POST("/category",rest.CategoryEndpoint.CreateCategory)
+	router.POST("/breed", rest.CreateBreed)
 }
-
-
