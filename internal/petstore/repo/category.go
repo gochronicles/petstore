@@ -1,6 +1,7 @@
-package postgres
+package repo
 
 import (
+	client "petstore/internal/database/postgres"
 	"petstore/pkg/models"
 )
 
@@ -22,18 +23,19 @@ func (c *Category) GetAllCategory() ([]*models.Category, error) {
 
 //CreateCategory create a Category
 func (c *Category) CreateCategory() error {
-	// stmt, err := dbClient.Prepare("INSERT INTO public.category (category_name) VALUES(?);")
-	// if err != nil {
-	// 	return err
-	// }
-	// //closing the statement to prevent memory leaks
-	// defer stmt.Close()
 
-	// _, err = stmt.Exec(c.CategoryName)
+	stmt, err := client.DbClient.Prepare("INSERT INTO public.category (category_name) VALUES(?);")
+	if err != nil {
+		return err
+	}
+	//closing the statement to prevent memory leaks
+	defer stmt.Close()
 
-	// if err != nil {
-	// 	return err
-	// }
+	_, err = stmt.Exec(c.CategoryName)
+
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

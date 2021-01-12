@@ -1,14 +1,14 @@
 package service
 
 import (
-	db "petstore/internal/petstore/repo/postgres"
+	"petstore/internal/petstore/repo"
 	"petstore/pkg/models"
 )
 
-var cs db.CategoryService
+var cs repo.CategoryService
 
 //CreateCategory create a breed
-func CreateCategory(c *db.Category) error {
+func CreateCategory(c *repo.Category) error {
 	cs = c
 	err = cs.CreateCategory()
 	if err != nil {

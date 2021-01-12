@@ -1,4 +1,4 @@
-package postgres
+package repo
 
 import (
 	"petstore/pkg/models"
