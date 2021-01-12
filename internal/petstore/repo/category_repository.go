@@ -2,7 +2,7 @@ package repo
 
 import (
 	"errors"
-	postgres2 "petstore/internal/postgres"
+	"petstore/internal/postgres"
 	"petstore/pkg/models"
 )
 
@@ -14,7 +14,7 @@ func (category *Category) Save() error {
 		return errors.New("Invlaid Category to save")
 	}
 	//Prepare statement for insert query
-	stmt, err := postgres2.DbClient.Prepare("INSERT INTO public.category (category_name) VALUES(?);")
+	stmt, err := postgres.DbClient.Prepare("INSERT INTO public.category (category_name) VALUES(?);")
 	if err != nil {
 		return err
 	}
@@ -26,6 +26,5 @@ func (category *Category) Save() error {
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
