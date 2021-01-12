@@ -34,6 +34,22 @@ func (b *Breed) DeleteBreed(id int) error {
 }
 
 //GetBreedByCategory get breed based on category
-func (b *Breed) GetBreedByCategory(categoryID int) ([]*models.Breed, error) {
-	return nil, nil
+func (b Breed) GetBreedByCategory(categoryID int) ([]*models.Breed, error) {
+	var breeds []*models.Breed
+	rows, err := dbClient.Query("SELECT id,breed_name,category_id from public.breed where category_id=$1", categoryID)
+	defer rows.Close()
+	for rows.Next() {
+		err = rows.Scan(&b.ID, &b.BreedName, &b.CategoryID)
+		bm := models.Breed(b)
+		breeds = append(breeds, &bm)
+		if err != nil {
+			return nil, err
+		}
+	}
+	// get any error encountered during iteration
+	err = rows.Err()
+	if err != nil {
+		return nil, err
+	}
+	return breeds, nil
 }

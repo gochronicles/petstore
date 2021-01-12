@@ -1,6 +1,7 @@
 package postgres
 
 import (
+	"fmt"
 	"petstore/pkg/models"
 )
 
@@ -14,7 +15,17 @@ func (l *Location) GetAllLocation() ([]*Location, error) {
 
 //CreateLocation create a Location
 func (l *Location) CreateLocation() error {
-	//Prepare statement for insert query
+	fmt.Println(dbClient)
+	stmt, err := dbClient.Prepare("INSERT INTO public.location (location_name) VALUES($1,$2);")
+	if err != nil {
+		return err
+	}
+	//closing the statement to prevent memory leaks
+	defer stmt.Close()
+	_, err = stmt.Exec(l.LocationName)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
