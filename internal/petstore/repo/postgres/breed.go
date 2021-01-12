@@ -15,7 +15,7 @@ type BreedService models.BreedService
 func (b *Breed) CreateBreed() error {
 	fmt.Println("In Repo")
 	fmt.Println(dbClient)
-	stmt, err := dbClient.Prepare("INSERT INTO public.breed (breed_name,category_id) VALUES($1,$2);")
+	stmt, err := dbClient.Prepare("INSERT INTO public.breed (breed_name,category_id) VALUES ($1,$2);")
 	if err != nil {
 		return err
 	}

@@ -50,13 +50,12 @@ func (c Category) GetAllCategory() ([]*models.Category, error) {
 
 //CreateCategory create a Category
 func (c *Category) CreateCategory() error {
-	stmt, err := dbClient.Prepare("INSERT INTO public.category (category_name) VALUES(?);")
+	stmt, err := dbClient.Prepare("INSERT INTO public.category (category_name) values ($1);")
 	if err != nil {
 		return err
 	}
 	//closing the statement to prevent memory leaks
 	defer stmt.Close()
-
 	_, err = stmt.Exec(c.CategoryName)
 
 	if err != nil {

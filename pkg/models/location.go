@@ -2,13 +2,13 @@ package models
 
 //Location model for location
 type Location struct {
-	ID           int
-	LocationName string
+	ID           int    `json:"id"`
+	LocationName string `json:"locationName"`
 }
 
 //LocationService interface for location model
 type LocationService interface {
-	CreateLocation()
-	DeleteLocation()
-	GetAllLocation()
+	CreateLocation() error
+	DeleteLocation(id int) error
+	GetAllLocation() ([]*Location, error)
 }

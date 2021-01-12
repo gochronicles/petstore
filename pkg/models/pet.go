@@ -2,14 +2,14 @@ package models
 
 //Pet storage model for pet
 type Pet struct {
-	ID          int
-	Name        string
-	Age         float64
-	Description string
-	ImageURL    string
-	LocationID  int
-	CategoryID  int
-	BreedID     int
+	ID          int     `json:"id"`
+	Name        string  `json:"name"`
+	Age         float64 `json:"age"`
+	Description string  `json:"description"`
+	ImageURL    string  `json:"imageUrl"`
+	LocationID  int     `json:"locationId"`
+	CategoryID  int     `json:"categoryId"`
+	BreedID     int     `json:"breedId"`
 }
 
 //PetService interface for Pet model

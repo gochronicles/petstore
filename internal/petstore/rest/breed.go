@@ -12,8 +12,11 @@ import (
 //CreateBreed route for POST
 func CreateBreed(c echo.Context) error {
 	fmt.Println("Creating Breed")
-	b := db.Breed{BreedName: "abc", CategoryID: 1}
-	err := service.CreateBreed(&b)
+	b := new(db.Breed)
+	if err := c.Bind(b); err != nil {
+		panic(err)
+	}
+	err := service.CreateBreed(b)
 	if err != nil {
 		fmt.Println(err)
 	}

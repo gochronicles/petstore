@@ -7,10 +7,28 @@ import (
 
 //Location use from models
 type Location models.Location
+type LocationService models.LocationService
 
 //GetAllLocation get all Locations
-func (l *Location) GetAllLocation() ([]*Location, error) {
-	return nil, nil
+func (l Location) GetAllLocation() ([]*models.Location, error) {
+	var locs []*models.Location
+	rows, err := dbClient.Query("SELECT * from public.Location")
+	defer rows.Close()
+	for rows.Next() {
+		err = rows.Scan(&l.ID, &l.LocationName)
+		cm := models.Location(l)
+		locs = append(locs, &cm)
+		if err != nil {
+			return nil, err
+		}
+
+	}
+	// get any error encountered during iteration
+	err = rows.Err()
+	if err != nil {
+		return nil, err
+	}
+	return locs, nil
 }
 
 //CreateLocation create a Location
