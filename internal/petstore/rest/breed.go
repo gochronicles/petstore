@@ -12,7 +12,10 @@ import (
 //CreateBreed route for POST
 func CreateBreed(c echo.Context) error {
 	fmt.Println("Creating Breed")
-	b := db.Breed{ID: 1, BreedName: "abc"}
-	service.CreateBreed(&b)
-	return c.String(http.StatusCreated, "Categories created successfully")
+	b := db.Breed{BreedName: "abc", CategoryID: 1}
+	err := service.CreateBreed(&b)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return c.String(http.StatusCreated, "Breed created successfully")
 }

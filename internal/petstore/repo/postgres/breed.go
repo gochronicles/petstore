@@ -14,7 +14,17 @@ type BreedService models.BreedService
 //CreateBreed create a breed
 func (b *Breed) CreateBreed() error {
 	fmt.Println("In Repo")
-	//Prepare statement for insert query
+	fmt.Println(dbClient)
+	stmt, err := dbClient.Prepare("INSERT INTO public.breed (breed_name,category_id) VALUES($1,$2);")
+	if err != nil {
+		return err
+	}
+	//closing the statement to prevent memory leaks
+	defer stmt.Close()
+	_, err = stmt.Exec(b.BreedName, b.CategoryID)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
