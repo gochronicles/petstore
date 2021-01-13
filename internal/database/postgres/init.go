@@ -17,7 +17,7 @@ const (
 )
 
 var (
-	dbClient *sql.DB
+	DbClient *sql.DB
 )
 
 func init() {
@@ -25,11 +25,11 @@ func init() {
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 	var err error
-	dbClient, err = sql.Open("postgres", connectionString)
+	DbClient, err = sql.Open("postgres", connectionString)
 	if err != nil {
 		panic(err)
 	}
 	// defer dbClient.Close()
-	fmt.Println((dbClient))
+	fmt.Println((DbClient))
 	fmt.Println("Successfully connected!")
 }

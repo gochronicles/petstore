@@ -3,6 +3,7 @@ package postgres
 import (
 	"database/sql"
 	"errors"
+	client "petstore/internal/database/postgres"
 	"petstore/pkg/models"
 )
 
@@ -14,7 +15,7 @@ type CategoryService models.CategoryService
 
 //GetCategory get one Category
 func (c Category) GetCategory(id int) (*models.Category, error) {
-	row := dbClient.QueryRow("SELECT * from public.category WHERE id=$1", id)
+	row := client.DbClient.QueryRow("SELECT * from public.category WHERE id=$1", id)
 	switch err := row.Scan(&c.ID, &c.CategoryName); err {
 	case sql.ErrNoRows:
 		return nil, errors.New("No matching records")
@@ -29,7 +30,7 @@ func (c Category) GetCategory(id int) (*models.Category, error) {
 //GetAllCategory get all Categorys
 func (c Category) GetAllCategory() ([]*models.Category, error) {
 	var categories []*models.Category
-	rows, err := dbClient.Query("SELECT * from public.category")
+	rows, err := client.DbClient.Query("SELECT * from public.category")
 	defer rows.Close()
 	for rows.Next() {
 		err = rows.Scan(&c.ID, &c.CategoryName)
@@ -50,7 +51,7 @@ func (c Category) GetAllCategory() ([]*models.Category, error) {
 
 //CreateCategory create a Category
 func (c *Category) CreateCategory() error {
-	stmt, err := dbClient.Prepare("INSERT INTO public.category (category_name) values ($1);")
+	stmt, err := client.DbClient.Prepare("INSERT INTO public.category (category_name) values ($1);")
 	if err != nil {
 		return err
 	}

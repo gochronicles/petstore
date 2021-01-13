@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"fmt"
+	client "petstore/internal/database/postgres"
 	"petstore/pkg/models"
 )
 
@@ -14,8 +15,8 @@ type BreedService models.BreedService
 //CreateBreed create a breed
 func (b *Breed) CreateBreed() error {
 	fmt.Println("In Repo")
-	fmt.Println(dbClient)
-	stmt, err := dbClient.Prepare("INSERT INTO public.breed (breed_name,category_id) VALUES ($1,$2);")
+
+	stmt, err := client.DbClient.Prepare("INSERT INTO public.breed (breed_name,category_id) VALUES ($1,$2);")
 	if err != nil {
 		return err
 	}
@@ -36,7 +37,7 @@ func (b *Breed) DeleteBreed(id int) error {
 //GetBreedByCategory get breed based on category
 func (b Breed) GetBreedByCategory(categoryID int) ([]*models.Breed, error) {
 	var breeds []*models.Breed
-	rows, err := dbClient.Query("SELECT id,breed_name,category_id from public.breed where category_id=$1", categoryID)
+	rows, err := client.DbClient.Query("SELECT id,breed_name,category_id from public.breed where category_id=$1", categoryID)
 	defer rows.Close()
 	for rows.Next() {
 		err = rows.Scan(&b.ID, &b.BreedName, &b.CategoryID)

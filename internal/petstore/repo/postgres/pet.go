@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"fmt"
+	client "petstore/internal/database/postgres"
 	"petstore/pkg/models"
 )
 
@@ -21,8 +22,8 @@ func (p *Pet) GetPetByCategory(categoryID int) ([]*models.Pet, error) {
 
 //CreatePet create a Pet
 func (p *Pet) CreatePet() error {
-	fmt.Println(dbClient)
-	stmt, err := dbClient.Prepare("INSERT INTO public.pet (name,image_url,description,breed_id,category_id,location_id) VALUES(?);")
+	fmt.Println(client.DbClient)
+	stmt, err := client.DbClient.Prepare("INSERT INTO public.pet (name,image_url,description,breed_id,category_id,location_id) VALUES(?);")
 	if err != nil {
 		return err
 	}

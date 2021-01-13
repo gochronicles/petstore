@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"fmt"
+	client "petstore/internal/database/postgres"
 	"petstore/pkg/models"
 )
 
@@ -12,7 +13,7 @@ type LocationService models.LocationService
 //GetAllLocation get all Locations
 func (l Location) GetAllLocation() ([]*models.Location, error) {
 	var locs []*models.Location
-	rows, err := dbClient.Query("SELECT * from public.Location")
+	rows, err := client.DbClient.Query("SELECT * from public.Location")
 	defer rows.Close()
 	for rows.Next() {
 		err = rows.Scan(&l.ID, &l.LocationName)
@@ -33,8 +34,8 @@ func (l Location) GetAllLocation() ([]*models.Location, error) {
 
 //CreateLocation create a Location
 func (l *Location) CreateLocation() error {
-	fmt.Println(dbClient)
-	stmt, err := dbClient.Prepare("INSERT INTO public.location (location_name) VALUES($1,$2);")
+	fmt.Println(client.DbClient)
+	stmt, err := client.DbClient.Prepare("INSERT INTO public.location (location_name) VALUES($1,$2);")
 	if err != nil {
 		return err
 	}
