@@ -23,4 +23,6 @@ func mapUrls() {
 	router.GET("/breed/:category_id", rest.GetBreedByCategory)
 	router.POST("/location", rest.CreateLocation)
 	router.GET("/location", rest.GetAllLocation)
+	router.GET("/pet/:category_id", rest.GetPetByCategory)
+	router.GET("/pet", rest.GetPet)
 }

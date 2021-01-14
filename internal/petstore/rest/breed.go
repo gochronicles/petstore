@@ -5,6 +5,7 @@ import (
 	"net/http"
 	db "petstore/internal/petstore/repo/postgres"
 	"petstore/internal/petstore/service"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -25,7 +26,8 @@ func CreateBreed(c echo.Context) error {
 
 //GetBreedByCategory send category id
 func GetBreedByCategory(c echo.Context) error {
-	response, err := service.GetBreedByCategory(1)
+	id, _ := strconv.Atoi(c.Param("category_id"))
+	response, err := service.GetBreedByCategory(id)
 	if err != nil {
 		panic(err)
 	}
