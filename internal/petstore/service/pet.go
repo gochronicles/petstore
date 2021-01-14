@@ -1,16 +1,15 @@
 package service
 
 import (
-	"fmt"
 	db "petstore/internal/petstore/repo/postgres"
 	"petstore/pkg/models"
 )
 
 var ps db.PetService
+var pet db.Pet
 
 //CreatePet create a Pet
 func CreatePet(p *db.Pet) error {
-	fmt.Println("In service")
 	ps = p
 	err = ps.CreatePet()
 	if err != nil {
@@ -21,15 +20,30 @@ func CreatePet(p *db.Pet) error {
 
 //DeletePet deletes a Pet
 func DeletePet(id int) error {
+	ps = &pet
+	err = ps.DeletePet(id)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
 //GetPet get one Pet
 func GetPet(id int) (*models.Pet, error) {
-	return nil, nil
+	ps = &pet
+	pet, err := ps.GetPet(id)
+	if err != nil {
+		return nil, err
+	}
+	return pet, nil
 }
 
 //GetPetByCategory get Pet based on category
 func GetPetByCategory(categoryID int) ([]*models.Pet, error) {
-	return nil, nil
+	ps = &pet
+	pets, err := ps.GetPetByCategory(categoryID)
+	if err != nil {
+		return nil, err
+	}
+	return pets, nil
 }

@@ -8,6 +8,7 @@ import (
 
 var err error
 var bs db.BreedService
+var breed db.Breed
 
 //CreateBreed create a breed
 func CreateBreed(b *db.Breed) error {
@@ -20,12 +21,12 @@ func CreateBreed(b *db.Breed) error {
 	return nil
 }
 
-//DeleteBreed deletes a breed
-func DeleteBreed(id int) error {
-	return nil
-}
-
 //GetBreedByCategory get breed based on category
 func GetBreedByCategory(categoryID int) ([]*models.Breed, error) {
-	return nil, nil
+	bs = &breed
+	breeds, err := bs.GetBreedByCategory(categoryID)
+	if err != nil {
+		return nil, err
+	}
+	return breeds, nil
 }

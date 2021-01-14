@@ -6,6 +6,7 @@ import (
 )
 
 var cs db.CategoryService
+var category db.Category
 
 //CreateCategory create a breed
 func CreateCategory(c *db.Category) error {
@@ -17,17 +18,22 @@ func CreateCategory(c *db.Category) error {
 	return nil
 }
 
-//DeleteCategory deletes a breed
-func DeleteCategory(id int) error {
-	return nil
-}
-
 //GetAllCategory get breed based on category
 func GetAllCategory() ([]*models.Category, error) {
-	return nil, nil
+	cs = &category
+	categories, err := cs.GetAllCategory()
+	if err != nil {
+		return nil, err
+	}
+	return categories, nil
 }
 
 //GetCategory get
-func GetCategory() (*models.Category, error) {
-	return nil, nil
+func GetCategory(id int) (*models.Category, error) {
+	cs = &category
+	c, err := cs.GetCategory(id)
+	if err != nil {
+		return nil, err
+	}
+	return c, nil
 }

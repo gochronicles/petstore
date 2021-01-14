@@ -10,6 +10,5 @@ type Breed struct {
 //BreedService interface for breed
 type BreedService interface {
 	CreateBreed() error
-	DeleteBreed(id int) error
 	GetBreedByCategory(categoryID int) ([]*Breed, error)
 }
