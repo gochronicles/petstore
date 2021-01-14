@@ -20,6 +20,11 @@ func CreatePet(p *db.Pet) error {
 
 //DeletePet deletes a Pet
 func DeletePet(id int) error {
+	ps = &pet
+	err = ps.DeletePet(id)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

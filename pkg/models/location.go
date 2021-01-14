@@ -9,6 +9,5 @@ type Location struct {
 //LocationService interface for location model
 type LocationService interface {
 	CreateLocation() error
-	DeleteLocation(id int) error
 	GetAllLocation() ([]*Location, error)
 }

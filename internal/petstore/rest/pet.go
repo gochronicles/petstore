@@ -38,3 +38,14 @@ func GetPet(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, response)
 }
+
+//DeletePet route for DELETE
+func DeletePet(c echo.Context) error {
+	id, _ := strconv.Atoi(c.QueryParam("id"))
+	err := service.DeletePet(id)
+	if err != nil {
+		panic(err)
+	}
+	return c.JSON(http.StatusOK, "Deleted")
+
+}

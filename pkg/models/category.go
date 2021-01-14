@@ -11,5 +11,4 @@ type CategoryService interface {
 	GetCategory(id int) (*Category, error)
 	GetAllCategory() ([]*Category, error)
 	CreateCategory() error
-	DeleteCategory(id int) error
 }

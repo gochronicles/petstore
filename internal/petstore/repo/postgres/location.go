@@ -47,8 +47,3 @@ func (l *Location) CreateLocation() error {
 	}
 	return nil
 }
-
-//DeleteLocation delete a Location
-func (l *Location) DeleteLocation(id int) error {
-	return nil
-}

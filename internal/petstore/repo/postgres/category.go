@@ -64,8 +64,3 @@ func (c *Category) CreateCategory() error {
 	}
 	return nil
 }
-
-//DeleteCategory delete a Category
-func (c *Category) DeleteCategory(id int) error {
-	return nil
-}

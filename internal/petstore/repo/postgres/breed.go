@@ -29,11 +29,6 @@ func (b *Breed) CreateBreed() error {
 	return nil
 }
 
-//DeleteBreed delete a breed
-func (b *Breed) DeleteBreed(id int) error {
-	return nil
-}
-
 //GetBreedByCategory get breed based on category
 func (b Breed) GetBreedByCategory(categoryID int) ([]*models.Breed, error) {
 	var breeds []*models.Breed

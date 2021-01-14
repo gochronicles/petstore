@@ -3,7 +3,6 @@ package postgres
 import (
 	"database/sql"
 	"errors"
-	"fmt"
 	client "petstore/internal/database/postgres"
 	"petstore/pkg/models"
 )
@@ -53,7 +52,6 @@ func (p Pet) GetPetByCategory(categoryID int) ([]*models.Pet, error) {
 
 //CreatePet create a Pet
 func (p *Pet) CreatePet() error {
-	fmt.Println(client.DbClient)
 	stmt, err := client.DbClient.Prepare("INSERT INTO pet (pet_name,age,image_url,description,breed_id,category_id,location_id) VALUES(?);")
 	if err != nil {
 		return err
@@ -69,5 +67,15 @@ func (p *Pet) CreatePet() error {
 
 //DeletePet delete a Pet
 func (p *Pet) DeletePet(id int) error {
+	stmt, err := client.DbClient.Prepare("DELETE from pet where id=$1")
+	if err != nil {
+		return err
+	}
+	//closing the statement to prevent memory leaks
+	defer stmt.Close()
+	_, err = stmt.Exec(id)
+	if err != nil {
+		return err
+	}
 	return nil
 }

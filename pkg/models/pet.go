@@ -15,7 +15,7 @@ type Pet struct {
 //PetService interface for Pet model
 type PetService interface {
 	CreatePet() error
-	DeletePet(id int) error
 	GetPetByCategory(categoryID int) ([]*Pet, error)
 	GetPet(id int) (*Pet, error)
+	DeletePet(id int) error
 }

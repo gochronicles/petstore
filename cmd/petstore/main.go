@@ -24,5 +24,7 @@ func mapUrls() {
 	router.POST("/location", rest.CreateLocation)
 	router.GET("/location", rest.GetAllLocation)
 	router.GET("/pet/:category_id", rest.GetPetByCategory)
+	router.POST("/pet", rest.CreatePet)
 	router.GET("/pet", rest.GetPet)
+	router.DELETE("/pet", rest.DeletePet)
 }

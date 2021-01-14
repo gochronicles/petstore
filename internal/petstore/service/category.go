@@ -18,11 +18,6 @@ func CreateCategory(c *db.Category) error {
 	return nil
 }
 
-//DeleteCategory deletes a breed
-func DeleteCategory(id int) error {
-	return nil
-}
-
 //GetAllCategory get breed based on category
 func GetAllCategory() ([]*models.Category, error) {
 	cs = &category

@@ -18,11 +18,6 @@ func CreateLocation(l *db.Location) error {
 	return nil
 }
 
-//DeleteLocation deletes a breed
-func DeleteLocation(id int) error {
-	return nil
-}
-
 //GetAllLocation get breed based on Location
 func GetAllLocation() ([]*models.Location, error) {
 	ls = &loc

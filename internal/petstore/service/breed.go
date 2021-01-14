@@ -21,11 +21,6 @@ func CreateBreed(b *db.Breed) error {
 	return nil
 }
 
-//DeleteBreed deletes a breed
-func DeleteBreed(id int) error {
-	return nil
-}
-
 //GetBreedByCategory get breed based on category
 func GetBreedByCategory(categoryID int) ([]*models.Breed, error) {
 	bs = &breed
