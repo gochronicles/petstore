@@ -12,15 +12,15 @@ import (
 
 //CreatePet route for POST
 func CreatePet(c echo.Context) error {
-	fmt.Println("Creating Breed")
+	fmt.Println("Creating Pet")
 	p := db.Pet{ID: 1, Name: "abc"}
 	service.CreatePet(&p)
-	return c.String(http.StatusCreated, "Categories created successfully")
+	return c.String(http.StatusCreated, "Pet created successfully")
 }
 
 //GetPetByCategory route for GET
 func GetPetByCategory(c echo.Context) error {
-	id, _ := strconv.Atoi(c.Param("category_id"))
+	id, _ := strconv.Atoi(c.QueryParam("category_id"))
 	response, err := service.GetPetByCategory(id)
 	if err != nil {
 		panic(err)
@@ -31,7 +31,7 @@ func GetPetByCategory(c echo.Context) error {
 
 //GetPet route for GET
 func GetPet(c echo.Context) error {
-	id, _ := strconv.Atoi(c.QueryParam("id"))
+	id, _ := strconv.Atoi(c.Param("id"))
 	response, err := service.GetPet(id)
 	if err != nil {
 		panic(err)
@@ -41,7 +41,7 @@ func GetPet(c echo.Context) error {
 
 //DeletePet route for DELETE
 func DeletePet(c echo.Context) error {
-	id, _ := strconv.Atoi(c.QueryParam("id"))
+	id, _ := strconv.Atoi(c.Param("id"))
 	err := service.DeletePet(id)
 	if err != nil {
 		panic(err)
