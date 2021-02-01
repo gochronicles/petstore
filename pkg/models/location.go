@@ -1,13 +1,15 @@
 package models
 
-//Location model for location
+//Location : Model for storing Location
 type Location struct {
 	ID           int    `json:"id"`
 	LocationName string `json:"locationName"`
 }
 
-//LocationService interface for location model
+//LocationService : Interface for location model
 type LocationService interface {
+	// add a new location
 	CreateLocation() error
+	// get all location
 	GetAllLocation() ([]*Location, error)
 }

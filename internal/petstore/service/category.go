@@ -8,19 +8,21 @@ import (
 var cs db.CategoryService
 var category db.Category
 
-//CreateCategory create a breed
-func CreateCategory(c *db.Category) error {
+//CreateCategory : Create a category. calls respective DB or repo layer
+func CreateCategory(c *db.Category) (int, error) {
 	cs = c
-	err = cs.CreateCategory()
+	// call repo function
+	id, err := cs.CreateCategory()
 	if err != nil {
-		return err
+		return id, err
 	}
-	return nil
+	return id, nil
 }
 
-//GetAllCategory get breed based on category
+//GetAllCategory : Get all categories. calls respective DB or repo layer
 func GetAllCategory() ([]*models.Category, error) {
 	cs = &category
+	// call repo function
 	categories, err := cs.GetAllCategory()
 	if err != nil {
 		return nil, err
@@ -28,9 +30,10 @@ func GetAllCategory() ([]*models.Category, error) {
 	return categories, nil
 }
 
-//GetCategory get
+//GetCategory : Get one category based on id. calls respective DB or repo layer
 func GetCategory(id int) (*models.Category, error) {
 	cs = &category
+	// call repo function
 	c, err := cs.GetCategory(id)
 	if err != nil {
 		return nil, err
