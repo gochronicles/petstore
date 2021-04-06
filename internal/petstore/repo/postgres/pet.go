@@ -79,3 +79,18 @@ func (p *Pet) DeletePet(id int) error {
 	}
 	return nil
 }
+
+func (p *Pet) UpdateImageURL() error {
+	stmt, err := client.DbClient.Prepare("UPDATE pet SET image_url=$1 WHERE id=$2;")
+	if err != nil {
+		return err
+	}
+	//closing the statement to prevent memory leaks
+	defer stmt.Close()
+	_, err = stmt.Exec(p.ImageURL, p.ID)
+	if err != nil {
+		return err
+	}
+	return nil
+
+}

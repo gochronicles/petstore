@@ -29,12 +29,13 @@ func (c *Category) CreateCategory() (int, error) {
 	default:
 		return c.ID, err
 	}
+
 }
 
 //GetCategory : get one Category based on an id in the DB
 func (c Category) GetCategory(id int) (*models.Category, error) {
 	// create and execute query
-	row := client.DbClient.QueryRow("SELECT * from public.category WHERE id=$1", id)
+	row := client.DbClient.QueryRow("SELECT * from category WHERE id=$1", id)
 	switch err := row.Scan(&c.ID, &c.CategoryName); err {
 	// no matching records found
 	case sql.ErrNoRows:
@@ -54,7 +55,7 @@ func (c Category) GetCategory(id int) (*models.Category, error) {
 //GetAllCategory : Get all Category from DB
 func (c Category) GetAllCategory() ([]*models.Category, error) {
 	var categories []*models.Category // this will hold final result
-	rows, err := client.DbClient.Query("SELECT * from public.category")
+	rows, err := client.DbClient.Query("SELECT * from category")
 	defer rows.Close()
 	// iterate through rows
 	for rows.Next() {

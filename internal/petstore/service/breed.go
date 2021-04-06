@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	db "petstore/internal/petstore/repo/postgres"
 	"petstore/pkg/models"
 )
@@ -12,7 +11,6 @@ var breed db.Breed
 
 //CreateBreed create a breed
 func CreateBreed(b *db.Breed) error {
-	fmt.Println("In service")
 	bs = b
 	err = bs.CreateBreed()
 	if err != nil {

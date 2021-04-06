@@ -12,9 +12,12 @@ import (
 func CreateLocation(c echo.Context) error {
 	l := new(db.Location)
 	if err := c.Bind(l); err != nil {
-		panic(err)
+		return echo.NewHTTPError(http.StatusBadGateway, "Error binding request body  ", err.Error())
 	}
-	service.CreateLocation(l)
+	err := service.CreateLocation(l)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, "error in creating a location : "+err.Error())
+	}
 	return c.String(http.StatusCreated, "Location created successfully")
 }
 
@@ -22,7 +25,8 @@ func CreateLocation(c echo.Context) error {
 func GetAllLocation(c echo.Context) error {
 	response, err := service.GetAllLocation()
 	if err != nil {
-		panic(err)
+		return echo.NewHTTPError(http.StatusInternalServerError, "error in getting locations : "+err.Error())
+
 	}
 	return c.JSON(http.StatusOK, response)
 
