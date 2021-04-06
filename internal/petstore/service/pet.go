@@ -47,3 +47,12 @@ func GetPetByCategory(categoryID int) ([]*models.Pet, error) {
 	}
 	return pets, nil
 }
+
+func UpdateImageURL(p *db.Pet) error {
+	ps = p
+	err = ps.UpdateImageURL()
+	if err != nil {
+		return err
+	}
+	return nil
+}

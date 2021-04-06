@@ -29,7 +29,7 @@ func (b *Breed) CreateBreed() error {
 	return nil
 }
 
-//GetBreedByCategory get breed based on category
+//GetBreedByCategory get breeds based on category
 func (b Breed) GetBreedByCategory(categoryID int) ([]*models.Breed, error) {
 	var breeds []*models.Breed
 	rows, err := client.DbClient.Query("SELECT id,breed_name,category_id from public.breed where category_id=$1", categoryID)

@@ -17,12 +17,12 @@ func CreateBreed(c echo.Context) error {
 	b := new(db.Breed)
 	// bind request body to the model object
 	if err := c.Bind(b); err != nil {
-		panic(err)
+		return echo.NewHTTPError(http.StatusBadRequest, "Error in Binding request object "+err.Error())
 	}
 	// call the service
 	err := service.CreateBreed(b)
 	if err != nil {
-		log.Println(err)
+		return echo.NewHTTPError(http.StatusInternalServerError, "Error in Creating a breed object "+err.Error())
 	}
 	//return success response
 	return c.String(http.StatusCreated, "Breed created successfully")
@@ -30,10 +30,14 @@ func CreateBreed(c echo.Context) error {
 
 //GetBreedByCategory send category id
 func GetBreedByCategory(c echo.Context) error {
-	id, _ := strconv.Atoi(c.Param("category_id"))
+	id, err := strconv.Atoi(c.Param("category_id"))
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, "id sent is incorrect. Please send a valid integer value")
+	}
 	response, err := service.GetBreedByCategory(id)
 	if err != nil {
-		panic(err)
+		return echo.NewHTTPError(http.StatusInternalServerError, "Error in getting a breed by category "+err.Error())
+
 	}
 	return c.JSON(http.StatusOK, response)
 }
