@@ -16,8 +16,8 @@ import (
 )
 
 var (
-	data         = db.Category{CategoryName: "rabbit"}
-	categoryJSON = `{"categoryname":"rabbit"}`
+	data         = db.Category{CategoryName: "some_category"}
+	categoryJSON = `{"categoryname":"some_category"}`
 )
 
 func TestCreateCategory(t *testing.T) {

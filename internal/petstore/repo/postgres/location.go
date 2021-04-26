@@ -35,7 +35,7 @@ func (l Location) GetAllLocation() ([]*models.Location, error) {
 //CreateLocation create a Location
 func (l *Location) CreateLocation() error {
 	fmt.Println(client.DbClient)
-	stmt, err := client.DbClient.Prepare("INSERT INTO public.location (location_name) VALUES($1,$2);")
+	stmt, err := client.DbClient.Prepare("INSERT INTO public.location (location_name) VALUES($1);")
 	if err != nil {
 		return err
 	}
