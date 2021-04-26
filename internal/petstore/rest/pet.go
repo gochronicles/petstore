@@ -13,8 +13,15 @@ import (
 //CreatePet route for POST
 func CreatePet(c echo.Context) error {
 	fmt.Println("Creating Pet")
-	p := db.Pet{ID: 1, Name: "abc"}
-	service.CreatePet(&p)
+	p := new(db.Pet)
+	// bind request body to the model object
+	if err := c.Bind(p); err != nil {
+		panic(err)
+	}
+	err:=service.CreatePet(p)
+	if err!=nil{
+		panic(err)
+	}
 	return c.String(http.StatusCreated, "Pet created successfully")
 }
 

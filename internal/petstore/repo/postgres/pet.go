@@ -52,7 +52,7 @@ func (p Pet) GetPetByCategory(categoryID int) ([]*models.Pet, error) {
 
 //CreatePet create a Pet
 func (p *Pet) CreatePet() error {
-	stmt, err := client.DbClient.Prepare("INSERT INTO pet (pet_name,age,image_url,description,breed_id,category_id,location_id) VALUES(?);")
+	stmt, err := client.DbClient.Prepare("INSERT INTO pet (name,age,image_url,description,breed_id,category_id,location_id) VALUES($1,$2,$3,$4,$5,$6,$7);")
 	if err != nil {
 		return err
 	}
