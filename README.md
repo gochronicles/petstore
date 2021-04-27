@@ -6,4 +6,7 @@ https://gochronicles.com/online-pet-adoption-store/
 
 The backend microservices are completely built using GO and the framework that is being used is Echo . We will be covering various aspects of microservices design in the future posts. Please subscribe to gochronicles.com for everything related to Go 
 
+
+In this section we talk about how to dockerise a Go app. We also talk about the usage of .dockerignore file which helps clean the container image.
+
 Go Gophers!!
