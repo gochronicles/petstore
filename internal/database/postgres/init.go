@@ -3,13 +3,14 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	//for connecting to db
 	_ "github.com/lib/pq"
 )
 
-const (
-	host     = "localhost"
+var (
+	host     = os.Getenv("DB_HOST")
 	port     = 5432
 	user     = "postgres"
 	password = "password"
