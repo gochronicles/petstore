@@ -22,7 +22,7 @@ func CreateBreed(c echo.Context) error {
 	// call the service
 	err := service.CreateBreed(b)
 	if err != nil {
-		log.Println(err)
+		return c.String(http.StatusInternalServerError, "Issue in creating a breed")
 	}
 	//return success response
 	return c.String(http.StatusCreated, "Breed created successfully")

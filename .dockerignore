@@ -1,0 +1,4 @@
+#Removing .git , vscode and idea files
+*/.idea/
+*/.vscode/
+*/.git

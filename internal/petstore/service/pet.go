@@ -1,6 +1,7 @@
 package service
 
-import (
+import
+(
 	db "petstore/internal/petstore/repo/postgres"
 	"petstore/pkg/models"
 )
